@@ -4,6 +4,7 @@
 var gulp = require('gulp');
 var browserSync = require('browser-sync');
 var reload = browserSync.reload;
+var del = require('del');
 
 // load plugins
 var $ = require('gulp-load-plugins')();
@@ -72,7 +73,7 @@ gulp.task('extras', function () {
 });
 
 gulp.task('clean', function () {
-    return gulp.src(['.tmp', 'dist'], { read: false }).pipe($.clean());
+    del.bind(null, ['.tmp', 'dist'])
 });
 
 gulp.task('build', ['html', 'images', 'fonts', 'extras']);
@@ -84,7 +85,7 @@ gulp.task('default', ['clean'], function () {
 gulp.task('bs-start', function () {
     browserSync.init({
        server: {
-           baseDir: ["app", ".tmp"]
+           baseDir: ['app', '.tmp']
        }
     });
 });
